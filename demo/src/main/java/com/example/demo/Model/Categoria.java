@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,4 +29,8 @@ public class Categoria {
     public Categoria(String tipo) {
         this.tipo = tipo;
     }
+
+     @Column(name = "ativo", nullable = false)
+    @ColumnDefault("true")
+    private boolean ativo = true;
 }

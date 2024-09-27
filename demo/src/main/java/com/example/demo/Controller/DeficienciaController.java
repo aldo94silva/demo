@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Form.DeficienciaForm;
+
 import com.example.demo.Model.Deficiencia;
+import com.example.demo.Repository.CategoriaRepository;
 import com.example.demo.Repository.DeficienciaRepository;
 
 
@@ -20,6 +23,9 @@ public class DeficienciaController {
 
     @Autowired
     private DeficienciaRepository deficienciaRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping("/deficiencia")
     public String index(Model model, @RequestParam("display") Optional<String> display){
@@ -32,5 +38,16 @@ public class DeficienciaController {
         return "deficiencia/listar";
     }
 
+    @GetMapping("/deficiencia/create")
+    public String create(Model model) {
+        DeficienciaForm deficienaForm = new DeficienciaForm();
+        
+        // List<Categoria> listCategorias = categoriaRepository.findAll();
+        // DeficienciaForm.setlistCategorias(listCategorias);
+
+        model.addAttribute("deficienaForm", deficienaForm);
+
+        return "deficiencia/create";
+    }
 
 }
