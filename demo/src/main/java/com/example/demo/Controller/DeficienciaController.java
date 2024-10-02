@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Form.DeficienciaForm;
-import com.example.demo.Form.Pessoa.PessoaForm;
 import com.example.demo.Model.Categoria;
 import com.example.demo.Model.Deficiencia;
-import com.example.demo.Model.Pessoa;
 import com.example.demo.Repository.CategoriaRepository;
 import com.example.demo.Repository.DeficienciaRepository;
 import com.example.demo.Service.DeficienciaService;
-import com.example.demo.Service.PessoaService;
 
 import jakarta.validation.Valid;
 
