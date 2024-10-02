@@ -2,7 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       th:replace="~{layout/layout :: layout}">
+
     <body th:fragment="content">
+        
+      <style>
+
+        .btn-alterar:hover{
+            background-color: #D97904;
+            transform: scale(1.1)
+        }
+
+
+        .btn-visualizar:hover{
+            border-radius: 15px;
+            background-color: #548C1C;
+            transform: scale(1.1);
+            
+        }
+
+        .btn-remover:hover{
+            background-color: #E3371E;
+            transform: scale(1.1)
+        }
+
+      </style>
         <div class="card mt-2">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title"><i class="fa-solid fa-users"></i> Listagem de Deficiência</h5>
@@ -33,10 +56,10 @@
                             <td th:text="${deficiencia.nome}"></td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-light" th:href="@{/deficiencia/update/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-pen-ruler"></i> Alterar</a>
-                                    <a class="btn btn-light" th:href="@{/deficiencia/visualizar/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-magnifying-glass"></i> Visualizar</a>
+                                    <a class="btn btn-alterar" th:href="@{/deficiencia/update/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-pen-ruler"></i> Alterar</a>
+                                    <a class="btn btn-visualizar" th:href="@{/deficiencia/visualizar/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-magnifying-glass"></i> Visualizar</a>
                                     <div th:if="${deficiencia.ativo}">
-                                        <a class="btn btn-light" th:href="@{/deficiencia/remover/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-trash"></i> Remover</a>
+                                        <a class="btn btn-remover" th:href="@{/deficiencia/remover/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-trash"></i> Remover</a>
                                     </div>
                                     <div th:if="${not deficiencia.ativo}">
                                         <a class="btn btn-light" th:href="@{/deficiencia/remover/{id}(id=${deficiencia.id})}"><i class="fa-solid fa-reply"></i> Recuperar</a>
