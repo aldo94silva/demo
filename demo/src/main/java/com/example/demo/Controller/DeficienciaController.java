@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Form.DeficienciaForm;
@@ -21,6 +22,9 @@ import com.example.demo.Repository.CategoriaRepository;
 import com.example.demo.Repository.DeficienciaRepository;
 import com.example.demo.Service.DeficienciaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 
@@ -37,7 +41,12 @@ public class DeficienciaController {
     @Autowired
     private DeficienciaService deficienciaService;
 
-   
+    @Operation(description = "Busca deficiência que já foi criada.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @GetMapping("/deficiencia")
     public String index(Model model, @RequestParam("display") Optional<String> display){
     
@@ -49,6 +58,12 @@ public class DeficienciaController {
         return "deficiencia/listar";
     }
 
+    @Operation(description = "Prepara o formulário para ser exibido na tela")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @GetMapping("/deficiencia/create")
     public String create(Model model) {
         DeficienciaForm deficienciaForm = new DeficienciaForm();
@@ -61,6 +76,13 @@ public class DeficienciaController {
         return "deficiencia/create";
     }
 
+
+    @Operation(description = "Cria um tipo de deficiencia")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @PostMapping("/deficiencia/create")
     public String create(@Valid DeficienciaForm deficienciaForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         List<Categoria> listCategorias = categoriaRepository.findAll();
@@ -79,6 +101,12 @@ public class DeficienciaController {
         return "redirect:/deficiencia";
     }
 
+    @Operation(description = "Prepara as deficiências para ser exibido na tela")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @GetMapping("/deficiencia/update/{id}")
     public String update(@PathVariable Long id, Model model){
         Optional<Deficiencia> deficiencia = deficienciaRepository.findById(id);
@@ -94,6 +122,13 @@ public class DeficienciaController {
         return "/deficiencia/update";
     }
 
+
+    @Operation(description = "Exibe as deficiências na tela")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @GetMapping("/deficiencia/visualizar/{id}")
     public String visualizar(@PathVariable Long id, Model model){
         Optional<Deficiencia> deficiencia = deficienciaRepository.findById(id);
@@ -109,6 +144,12 @@ public class DeficienciaController {
         return "/deficiencia/visualizar";
     }
 
+    @Operation(description = "Faz um update do código selecionado pelo usuário")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @PostMapping("/deficiencia/update/{id}")
     public String update(@PathVariable Long id, @Valid DeficienciaForm deficienciaForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
         List<Categoria> listCategorias = categoriaRepository.findAll();
@@ -127,6 +168,12 @@ public class DeficienciaController {
         return "redirect:/deficiencia";
     }
 
+    @Operation(description = "Remove a deficiência pelo código selecionado pelo usuário")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tudo certo!"),
+        @ApiResponse(responseCode = "400", description = "Não encontrado deficiencias."),
+        @ApiResponse(responseCode = "404", description = "Página não encontarda!"),
+    })
     @GetMapping("/deficiencia/remover/{id}")
     public String remover(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Optional<Deficiencia> deficiencia = this.deficienciaRepository.findById(id);
